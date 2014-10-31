@@ -1,0 +1,45 @@
+﻿@model List<FixPonto.PontoDia>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1>Resultado</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            <table class="table-condensed table-bordered">
+                <tr>
+                    <th>Dia</th>
+                    <th>Entrada Almoço</th>
+                    <th>Min Descontos</th>
+                </tr>
+                @foreach (var dia in Model)
+                {
+                    <tr>
+                        <td>@dia.Dia</td>
+                        <td>@dia.Almoco.VoltaTexto</td>
+                        <td>@dia.MinutosDesconto</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div>
+            <table class="table-condensed table-bordered">
+                <tr>
+                    <th>Novas entradas de almoço</th>
+                </tr>
+                @foreach (var dia in Model)
+                {
+                    <tr>
+                        <td>@dia.NovaEntradaAlmocoTexto</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+</div>

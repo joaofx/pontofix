@@ -1,0 +1,32 @@
+﻿@model Web.Models.PontoInput
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1>Ponto Fix</h1>
+
+@using (Html.BeginForm("Result", "Home", FormMethod.Post))
+{
+
+    <div class="row well">
+        <input type="submit" class="btn btn-primary" value="Enviar" />
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <label>Catraca:</label>
+            <div>
+                @Html.TextAreaFor(x => x.Catraca, 20, 100, new { style = "width: 100%" })
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label>Períodos:</label>
+            <div>
+                @Html.TextAreaFor(x => x.Periodos, 20, 100, new { style = "width: 50%" })
+            </div>
+        </div>
+
+    </div>
+}
+
