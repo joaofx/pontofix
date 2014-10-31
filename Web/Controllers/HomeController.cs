@@ -16,6 +16,12 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Result(PontoInput input)
         {
+            var dias = CalculaDias(input);
+            return View(dias);
+        }
+
+        private static List<PontoDia> CalculaDias(PontoInput input)
+        {
             var catracaDias = ParseCatraca.Parse(input.Catraca);
             var periodoDias = ParsePeriodos.Parse(input.Periodos);
 
@@ -26,12 +32,14 @@ namespace Web.Controllers
                 var catracaDia = catracaDias[index];
                 var periodoDia = periodoDias[index];
 
-                if (string.IsNullOrEmpty(periodoDia))
-                var dia = new PontoDia(catracaDia, periodoDia);
-                dias.Add(dia);
+                if (string.IsNullOrEmpty(periodoDia) == false)
+                {
+                    var dia = new PontoDia(catracaDia, periodoDia);
+                    dias.Add(dia);
+                }
             }
 
-            return View(dias);
+            return dias;
         }
     }
 }
