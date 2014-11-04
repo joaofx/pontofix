@@ -33,9 +33,9 @@
   <ItemGroup>
     <Compile Include="ParseCatraca.cs" />
     <Compile Include="ParsePeriodos.cs" />
-    <Compile Include="PontoDia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Intervalo.cs" />
+    <Compile Include="Dia.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

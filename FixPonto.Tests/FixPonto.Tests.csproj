@@ -49,7 +49,7 @@
     <Compile Include="IntervaloTest.cs" />
     <Compile Include="ParseCatracaTest.cs" />
     <Compile Include="ParsePeriodosTest.cs" />
-    <Compile Include="PontoDiaAcceptanceTest.cs" />
+    <Compile Include="DiaTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

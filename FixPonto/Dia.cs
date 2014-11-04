@@ -2,39 +2,25 @@
 {
     using System;
     using System.Collections.Generic;
+	using System.Linq;
 
-    public class PontoDia
+    public class Dia
     {
-		public PontoDia(string batidasTexto, string periodosTexto)
+		private string batidasTexto;
+		private string periodosTexto;
+
+		public Dia(string batidasTexto, string periodosTexto)
 		{
-			this.BatidasTexto = batidasTexto;
-			this.PeriodoTexto = periodosTexto;
+			this.batidasTexto = batidasTexto;
+			this.periodosTexto = periodosTexto;
 
 			this.Almoco = this.ParseBatidas(periodosTexto, 0)[0];
-
-			this.Batidas = new List<string>();
 			this.Intervalos = this.ParseBatidas(batidasTexto);
+
+			this.MinutosDeDesconto = this.CalcularMinutosDeDesconto();
         }
 
-		public string BatidasTexto
-        {
-            get;
-            private set;
-        }
-
-		public string PeriodoTexto
-		{
-			get;
-			private set;
-		}
-
-        public string Dia
-        {
-            get;
-            set;
-        }
-
-		public List<string> Batidas
+        public string Data
         {
             get;
             set;
@@ -56,35 +42,21 @@
 		{
 			get
 			{
-				return this.Almoco.Volta.Add(TimeSpan.FromMinutes(this.MinutosDesconto));
+				return this.Almoco.Volta.Add(TimeSpan.FromMinutes(this.MinutosDeDesconto));
 			}
 		}
 
-		public double MinutosDesconto 
+		public double MinutosDeDesconto 
 		{
-			get 
-			{
-				double total = 0;
-
-				foreach (var intervalo in this.Intervalos)
-				{
-					if (intervalo.EhAlmoco(this.Almoco) == false)
-					{
-						total += intervalo.MinutosIntervaloDescontaveis;
-					}
-				}
-
-				return total;
-			}
+			get;
+			private set;
 		}
 
-        public string NovaEntradaAlmocoTexto
-        {
-            get
-            {
-                return new DateTime(this.NovaEntradaAlmoco.Ticks).ToString("HH:mm"); 
-            }
-        }
+		private double CalcularMinutosDeDesconto()
+		{
+			return this.Intervalos.Sum(
+				intervalo => intervalo.EhAlmoco(this.Almoco) == false ? intervalo.MinutosIntervaloDescontaveis : 0);
+		}
 
         private List<Intervalo> ParseBatidas(string texto, int startIndex = 1)
 		{
@@ -94,7 +66,7 @@
 				.Replace("\t", " ")
 				.Split(new[] { " " }, System.StringSplitOptions.RemoveEmptyEntries);
 
-			this.Dia = campos[0];
+			this.Data = campos[0];
 
 			for (var i = startIndex; i < campos.Length; i++) 
 			{

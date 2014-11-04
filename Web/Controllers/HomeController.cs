@@ -20,12 +20,12 @@ namespace Web.Controllers
             return View(dias);
         }
 
-        private static List<PontoDia> CalculaDias(PontoInput input)
+        private static List<Dia> CalculaDias(PontoInput input)
         {
             var catracaDias = ParseCatraca.Parse(input.Catraca);
             var periodoDias = ParsePeriodos.Parse(input.Periodos);
 
-            var dias = new List<PontoDia>();
+            var dias = new List<Dia>();
 
             for (int index = 0; index < catracaDias.Count; index++)
             {
@@ -34,7 +34,7 @@ namespace Web.Controllers
 
                 if (string.IsNullOrEmpty(periodoDia) == false)
                 {
-                    var dia = new PontoDia(catracaDia, periodoDia);
+                    var dia = new Dia(catracaDia, periodoDia);
                     dias.Add(dia);
                 }
             }

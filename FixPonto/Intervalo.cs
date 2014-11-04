@@ -4,8 +4,6 @@ namespace FixPonto
 
     public class Intervalo
 	{
-		private static readonly TimeSpan InicioAlmoco = TimeSpan.Parse("11:00");
-		private static readonly TimeSpan FimAlmoco = TimeSpan.Parse("14:30");
 		private const double MinutosIntervaloAceitavel = 5;
 
 		public Intervalo(string saidaTexto, string voltaTexto)
