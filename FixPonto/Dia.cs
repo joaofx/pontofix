@@ -14,8 +14,8 @@
 			this.batidasTexto = batidasTexto;
 			this.periodosTexto = periodosTexto;
 
-			this.Almoco = this.ParseBatidas(periodosTexto, 0)[0];
-			this.Intervalos = this.ParseBatidas(batidasTexto);
+			this.Almoco = this.ObterAlmoco(periodosTexto);
+			this.Intervalos = this.ParseIntervalos(batidasTexto);
 
 			this.MinutosDeDesconto = this.CalcularMinutosDeDesconto();
         }
@@ -58,13 +58,23 @@
 				intervalo => intervalo.EhAlmoco(this.Almoco) == false ? intervalo.MinutosIntervaloDescontaveis : 0);
 		}
 
-        private List<Intervalo> ParseBatidas(string texto, int startIndex = 1)
+		private Intervalo ObterAlmoco(string periodosTexto)
+		{
+			return this.ParseIntervalos(periodosTexto, 0).SingleOrDefault();
+		}
+
+        private List<Intervalo> ParseIntervalos(string texto, int startIndex = 1)
 		{
 			var batidas = new List<string>();
 
 			var campos = texto
 				.Replace("\t", " ")
 				.Split(new[] { " " }, System.StringSplitOptions.RemoveEmptyEntries);
+
+			if (campos.Length == 0)
+			{
+				return new List<Intervalo>();
+			}
 
 			this.Data = campos[0];
 

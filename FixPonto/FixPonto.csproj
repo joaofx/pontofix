@@ -36,6 +36,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Intervalo.cs" />
     <Compile Include="Dia.cs" />
+    <Compile Include="CalcularPonto.cs" />
+    <Compile Include="ParseException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

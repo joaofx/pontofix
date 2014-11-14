@@ -7,10 +7,24 @@
 
     public class ParsePeriodos
     {
-        public static List<string> Parse(string batidas)
+        public static List<string> Parse(string conteudo)
         {
-            var linhas = Regex.Split(batidas, "\r\n|\r|\n");
-            return linhas.Select(LimparLinha).ToList();
+			var periodos = new List<string>();
+			var linhas = conteudo.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+			foreach (var linha in linhas)
+			{
+				var linhaLimpa = LimparLinha(linha);
+
+				if (string.IsNullOrEmpty(linhaLimpa) == false)
+				{
+					periodos.Add(linhaLimpa);
+				}
+
+				Console.WriteLine(linhaLimpa);
+			}
+
+			return periodos.Select(LimparLinha).ToList();
         }
 
 		public static Intervalo ParseLinha(string linha)
@@ -21,7 +35,7 @@
 
 		private static string LimparLinha(string linha)
 		{
-			return linha.Replace("\"", "").Trim();
+			return linha.Replace("\"", "").Replace(" ", "").Trim();
 		}
     }
 }

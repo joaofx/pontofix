@@ -1,6 +1,6 @@
 ﻿namespace Web.Models
 {
-    public class PontoInput
+    public class PontoForm
     {
         public string Catraca
         {
